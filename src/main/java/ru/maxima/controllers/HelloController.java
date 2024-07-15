@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HelloController {
 
     @GetMapping("/new-hello-world")
-    public String newSayHello(@RequestParam("name") String name,
-                              @RequestParam("surname") String surname) {
-        System.out.println("YOu are inside your controller");
+    public String newSayHello(@RequestParam(value = "name", required = false) String name,
+                              @RequestParam(value = "surname", required = true) String surname) {
+        System.out.println("You are inside your controller");
         System.out.println(name.length() + " : " + surname);
         return "hello";
     }
