@@ -20,7 +20,10 @@ public class HelloController {
 
     @GetMapping("/old-hello-world")
     public String oldSayHello(HttpServletRequest request) {
-        String name = request.getParameter("name")
-        return "privet upir";
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        System.out.println("YOu are inside your controller");
+        System.out.println(name.length() + " : " + surname);
+        return "hello";
     }
 }
