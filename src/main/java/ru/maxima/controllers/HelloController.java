@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello-world")
-    public String sayHello() {
+    @GetMapping("/new-hello-world")
+    public String newSayHello(@RequestParam("name") String name,
+                              @RequestParam("surname") String surname) {
+        System.out.println("YOu are inside your controller");
+        System.out.println(name.length() + " : " + surname);
         return "hello";
     }
 
 
-    @GetMapping("/point")
-    public String privetupir() {
+    @GetMapping("/old-hello-world")
+    public String oldSayHello(HttpServletRequest request) {
+        String name = request.getParameter("name")
         return "privet upir";
     }
 }
