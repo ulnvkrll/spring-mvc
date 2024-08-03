@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Title of Page to create person</title>
+</head>
+
+<body>
+
+<form th:method="POST" th:action="@{/people}" th:object="${newPerson}">
+    <label for="name">Enter name of new person</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+    <br/>
+    <label for="mail">Enter mail of edited person</label>
+    <input type="text" th:field="*{mail}" id="mail">
+    <div style="color: red"  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">mail error</div>
+    <br/>
+    <label for="age">Enter age of new person</label>
+    <input type="text" th:field="*{age}" id="age">
+    <div style="color: red"  th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
+    <br/>
+    <input type="submit" value="Push me to create!">
+</form>
+
+</body>
+
+</html>

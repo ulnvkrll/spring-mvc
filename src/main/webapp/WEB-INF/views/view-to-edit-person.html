@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Title of Page to edit person</title>
+</head>
+
+<body>
+
+<form th:method="POST" th:action="@{/people/{id}(id=${editedPerson.getId()})}" th:object="${editedPerson}">
+    <label for="name">Enter name of edited person</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red"  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</div>
+<br>
+    <input type="submit" value="Push me to edit name for this person!">
+<br>
+<br>
+    <label for="mail">Enter mail of edited person</label>
+    <input type="text" th:field="*{mail}" id="mail">
+    <div style="color: red"  th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">mail error</div>
+<br>
+    <input type="submit" value="Push me to edit mail for this person!">
+<br>
+<br>
+    <label for="age">Enter age of edited person</label>
+    <input type="text" th:field="*{age}" id="age">
+    <div style="color: red"  th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
+<br>
+    <input type="submit" value="Push me to edit mail for this person!">
+</form>
+
+</body>
+
+</html>
