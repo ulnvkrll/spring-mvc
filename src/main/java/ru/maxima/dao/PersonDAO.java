@@ -62,9 +62,14 @@ public class PersonDAO {
     public Person findById(Long id) {
         Person person = null;
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "select * from person where id = " + id;
-            ResultSet resultSet = statement.executeQuery(SQL);
+
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from person where id = ?" );
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//            Statement statement = connection.createStatement();
+//            String SQL = "select * from person where id = " + id;
+//            ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()) {
                 person = new Person();
@@ -80,20 +85,28 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        Person maxByAge = getAllPeople()
-                .stream()
-                .max(Comparator.comparing(Person::getAge))
-                .orElseThrow(NoSuchElementException::new);
-        Long nextId = (maxByAge.getId() + 1);
+//        Person maxByAge = getAllPeople()
+//                .stream()
+//                .max(Comparator.comparing(Person::getAge))
+//                .orElseThrow(NoSuchElementException::new);
+//        Long nextId = (maxByAge.getId() + 1);
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "insert into person(id, name, age, email) values(" +
-                    nextId + ", '" +
-                    person.getName() + "' ," +
-                    person.getAge() + ", '" +
-                    person.getMail() + "'" +
-                    ")";
-            statement.executeUpdate(SQL);
+            PreparedStatement preparedStatement
+                    = connection.prepareStatement("insert into person(name, age, email) values (?, ?, ?)");
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.setInt(2, person.getAge());
+            preparedStatement.setString(3, person.getMail());
+            preparedStatement.executeUpdate();
+
+
+//            Statement statement = connection.createStatement();
+//            String SQL = "insert into person(id, name, age, email) values(" +
+//                    nextId + ", '" +
+//                    person.getName() + "' ," +
+//                    person.getAge() + ", '" +
+//                    person.getMail() + "'" +
+//                    ")";
+//            statement.executeUpdate(SQL);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
         }
