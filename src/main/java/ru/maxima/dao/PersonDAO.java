@@ -27,9 +27,9 @@ public class PersonDAO {
 
 
     public List<Person> getAllPeople() {
-
-        return jdbcTemplate.query("select * from person",
-                new BeanPropertyRowMapper<>(Person.class));
+List<Person> people = jdbcTemplate.query("select * from person",
+        new BeanPropertyRowMapper<>(Person.class));
+        return people;
     }
 
     public Person findById(Long id) {
@@ -46,12 +46,12 @@ public class PersonDAO {
     }
 
     public void update(Long id, Person editedPerson) {
-        jdbcTemplate.update("update person set name = ?, age = ?, email = ? where id = ?)",
+        jdbcTemplate.update("update person set name = ? , age = ? , email = ? where id = ? ",
                 editedPerson.getName(), editedPerson.getAge(), editedPerson.getMail(), id);
     }
 
     public void deleteById(Long id) {
-        jdbcTemplate.update("delete fromm person where id = ?, id");
+        jdbcTemplate.update("delete from person where id = ?", id);
     }
 
 }
