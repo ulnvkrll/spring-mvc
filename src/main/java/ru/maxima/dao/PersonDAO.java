@@ -54,4 +54,8 @@ public class PersonDAO {
         jdbcTemplate.update("delete from person where id = ?", id);
     }
 
+    public void upgradeToAdmin(Person person) {
+        jdbcTemplate.update("update person set admin = true where id = ? ",
+                person.getId() );
+    }
 }

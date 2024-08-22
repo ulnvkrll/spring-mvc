@@ -25,5 +25,5 @@ public class Person {
     @Email(message = "Email is not valid")
     private String mail;
 
-
+    private boolean isAdmin;
 }
