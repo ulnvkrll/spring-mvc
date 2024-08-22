@@ -27,15 +27,15 @@ public class PersonDAO {
 
 
     public List<Person> getAllPeople() {
-List<Person> people = jdbcTemplate.query("select * from person",
-        new BeanPropertyRowMapper<>(Person.class));
-        return people;
+        return jdbcTemplate.query("select * from person",
+        new PersonMapper());
+
     }
 
     public Person findById(Long id) {
         return jdbcTemplate.query("select * from person where id = ?",
                 new Object[]{id},
-                new BeanPropertyRowMapper<>(Person.class)).stream()
+                new PersonMapper()).stream()
                         .findAny().orElse(null);
     }
 

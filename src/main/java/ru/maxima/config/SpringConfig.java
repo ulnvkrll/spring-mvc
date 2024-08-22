@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 import java.sql.DriverManager;
 
 @Configuration
-@ComponentScan
+@ComponentScan("ru.maxima")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 

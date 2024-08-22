@@ -9,6 +9,13 @@ import java.sql.SQLException;
 public class PersonMapper implements RowMapper<Person> {
     @Override
     public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        Person person = new Person();
+
+        person.setId(rs.getLong("id"));
+        person.setAge(rs.getInt("age"));
+        person.setName(rs.getString("name"));
+        person.setMail(rs.getString("email"));
+
+        return person;
     }
 }
